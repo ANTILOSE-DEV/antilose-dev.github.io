@@ -12,7 +12,7 @@
     <header class="header">
         <div class="container">
             <div class="nav">
-                <a href="/" class="logo">
+                <a href="index.html" class="logo">
                     <i class="fas fa-gamepad"></i>
                     WINTRADE PROJECT
                 </a>
@@ -200,33 +200,34 @@
     </footer>
 
     <script>
-    // Обработка 404 ошибок для GitHub Pages
+    // Только для GitHub Pages - обработка 404 ошибок
     document.addEventListener('DOMContentLoaded', function() {
-        // Проверяем, является ли текущая страница 404 ошибкой
-        if (document.title.includes('404') || 
-            window.location.pathname.includes('404') ||
-            document.body.innerHTML.includes('Страница не найдена')) {
+        // Проверяем, находимся ли мы на GitHub Pages
+        if (window.location.hostname.includes('github.io')) {
+            // Проверяем, является ли текущая страница 404 ошибкой (только если URL содержит несуществующий путь)
+            const validPaths = [
+                '/',
+                '/index.html',
+                '/404.html',
+                '/game/genshin.html',
+                '/game/honkai.html', 
+                '/game/cs2.html',
+                '/game/standoff2.html',
+                '/game/roblox.html'
+            ];
             
-            // Перенаправляем на нашу кастомную 404 страницу
-            if (!window.location.pathname.includes('404.html')) {
+            const currentPath = window.location.pathname;
+            
+            // Если текущий путь не в списке допустимых и мы не на 404 странице
+            if (!validPaths.includes(currentPath) && 
+                !validPaths.includes(currentPath + '.html') &&
+                !currentPath.includes('404.html')) {
+                
+                // Перенаправляем на 404 страницу
                 window.location.href = '404.html';
             }
         }
     });
-
-    // Альтернативный метод для обработки несуществующих страниц
-    if (window.location.pathname !== '/' && 
-        !window.location.pathname.includes('.html') &&
-        !window.location.pathname.includes('game/') &&
-        !window.location.pathname.includes('css/') &&
-        !window.location.pathname.includes('js/')) {
-        
-        // Проверяем существование страницы
-        const currentPath = window.location.pathname;
-        if (currentPath !== '/' && !currentPath.includes('.')) {
-            window.location.href = '404.html';
-        }
-    }
     </script>
 </body>
 </html>
