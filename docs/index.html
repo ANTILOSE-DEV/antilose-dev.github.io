@@ -59,25 +59,21 @@
             color: white;
             display: flex;
             align-items: center;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .logo-w {
             color: #4a6cfa;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 2;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .logo-text {
             opacity: 0;
             transform: translateX(-20px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             margin-left: 10px;
             white-space: nowrap;
-            position: relative;
-            z-index: 1;
         }
 
         .logo-text.show {
@@ -90,17 +86,13 @@
             transform: translateX(20px);
         }
 
-        .logo-w.move-left {
-            transform: translateX(-50%);
-        }
-
-        .logo-w.move-right {
-            transform: translateX(0%);
+        .logo-w.move-center {
+            transform: translateX(0);
         }
 
         .logo-w.fade-out {
             opacity: 0;
-            transform: scale(1.2) translateX(0%);
+            transform: scale(1.2);
         }
 
         /* Скрываем основной контент во время анимации */
@@ -350,38 +342,31 @@
 
         // Последовательность анимации для десктопов
         setTimeout(() => {
-            // 1. Буква W съезжает влево
-            logoW.classList.add('move-left');
+            // 1. Показываем полный текст
+            logoText.classList.add('show');
             
             setTimeout(() => {
-                // 2. Появляется текст "INTRADE PROJECT"
-                logoText.classList.add('show');
+                // 2. Убираем текст и возвращаем W в центр
+                logoText.classList.remove('show');
+                logoText.classList.add('hide');
                 
                 setTimeout(() => {
-                    // 3. Буква W съезжает обратно вправо, убирая текст
-                    logoW.classList.remove('move-left');
-                    logoW.classList.add('move-right');
-                    logoText.classList.remove('show');
-                    logoText.classList.add('hide');
+                    // 3. Исчезаем W
+                    logoW.classList.add('fade-out');
                     
                     setTimeout(() => {
-                        // 4. Буква W исчезает в центре
-                        logoW.classList.add('fade-out');
+                        // 4. Показываем основной контент и header
+                        mainContent.classList.add('show');
+                        mainHeader.classList.add('show');
                         
                         setTimeout(() => {
-                            // 5. Показываем основной контент и header
-                            mainContent.classList.add('show');
-                            mainHeader.classList.add('show');
-                            
-                            setTimeout(() => {
-                                // 6. Плавно скрываем анимированный логотип
-                                logoAnimation.classList.add('fade-out');
-                            }, 300);
-                        }, 500);
-                    }, 800);
-                }, 1200);
-            }, 800);
-        }, 500);
+                            // 5. Плавно скрываем анимированный логотип
+                            logoAnimation.classList.add('fade-out');
+                        }, 300);
+                    }, 500);
+                }, 800);
+            }, 1200);
+        }, 800);
     });
 
     // Только для GitHub Pages - обработка 404 ошибок
