@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WINTRADE PROJECT - Главная</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -15,200 +18,346 @@
     <meta name="msapplication-TileColor" content="#4a6cfa">
     <meta name="theme-color" content="#4a6cfa">
     
-    <!-- Существующие стили -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Анимация логотипа */
+        .logo-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .logo-animation.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .animated-logo {
+            font-size: 120px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-w {
+            color: #4a6cfa;
+        }
+
+        .logo-text {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-left: 0;
+            white-space: nowrap;
+        }
+
+        .logo-text.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animated-logo.final-position {
+            font-size: 24px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            transform: none;
+        }
+
+        /* Скрываем основной контент во время анимации */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.5s ease 0.5s;
+        }
+
+        .main-content.show {
+            opacity: 1;
+        }
+
+        /* Скрываем основной header изначально */
+        .header {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .header.show {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="nav">
-                <a href="index.html" class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    WINTRADE PROJECT
-                </a>
-            </div>
+    <!-- Анимированный логотип -->
+    <div class="logo-animation" id="logoAnimation">
+        <div class="animated-logo" id="animatedLogo">
+            <span class="logo-w">W</span>
+            <span class="logo-text" id="logoText">INTRADE PROJECT</span>
         </div>
-    </header>
-    
-    <main class="container">
-        <h1 class="section-title">
-            <i class="fas fa-gamepad"></i>
-            Доступные игры
-        </h1>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-content" id="mainContent">
+        <header class="header" id="mainHeader">
+            <div class="container">
+                <div class="nav">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-gamepad"></i>
+                        WINTRADE PROJECT
+                    </a>
+                </div>
+            </div>
+        </header>
         
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-header">
-                    <h3 class="game-title">Genshin Impact</h3>
-                    <div class="game-meta">
-                        <span><i class="fas fa-tag"></i> Ролевые игры</span>
-                        <span><i class="fas fa-file-alt"></i> 4 файлов</span>
-                    </div>
-                </div>
-                <div class="game-body">
-                    <p class="game-description">Открытый мир action-RPG с элементами аниме-стилистики</p>
-                    <div class="game-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Последнее обновление</div>
-                            <div class="detail-value">2025-07-30</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Самый популярный чит</div>
-                            <div class="detail-value">Shika</div>
+        <main class="container">
+            <h1 class="section-title">
+                <i class="fas fa-gamepad"></i>
+                Доступные игры
+            </h1>
+            
+            <div class="games-grid">
+                <!-- Остальной контент с играми остается без изменений -->
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3 class="game-title">Genshin Impact</h3>
+                        <div class="game-meta">
+                            <span><i class="fas fa-tag"></i> Ролевые игры</span>
+                            <span><i class="fas fa-file-alt"></i> 4 файлов</span>
                         </div>
                     </div>
+                    <div class="game-body">
+                        <p class="game-description">Открытый мир action-RPG с элементами аниме-стилистики</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Последнее обновление</div>
+                                <div class="detail-value">2025-07-30</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Самый популярный чит</div>
+                                <div class="detail-value">Shika</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <a href="game/genshin.html" class="view-button">
+                            <i class="fas fa-folder-open"></i>
+                            Просмотреть файлы
+                        </a>
+                    </div>
                 </div>
-                <div class="game-footer">
-                    <a href="game/genshin.html" class="view-button">
-                        <i class="fas fa-folder-open"></i>
-                        Просмотреть файлы
-                    </a>
-                </div>
-            </div>
 
-            <div class="game-card">
-                <div class="game-header">
-                    <h3 class="game-title">Honkai: Star Rail</h3>
-                    <div class="game-meta">
-                        <span><i class="fas fa-tag"></i> Ролевые игры</span>
-                        <span><i class="fas fa-file-alt"></i> 1 файлов</span>
-                    </div>
-                </div>
-                <div class="game-body">
-                    <p class="game-description">Космическая RPG с пошаговыми боями от создателей Genshin Impact</p>
-                    <div class="game-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Последнее обновление</div>
-                            <div class="detail-value">2025-08-13</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Самый популярный чит</div>
-                            <div class="detail-value">Unicore</div>
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3 class="game-title">Honkai: Star Rail</h3>
+                        <div class="game-meta">
+                            <span><i class="fas fa-tag"></i> Ролевые игры</span>
+                            <span><i class="fas fa-file-alt"></i> 1 файлов</span>
                         </div>
                     </div>
+                    <div class="game-body">
+                        <p class="game-description">Космическая RPG с пошаговыми боями от создателей Genshin Impact</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Последнее обновление</div>
+                                <div class="detail-value">2025-08-13</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Самый популярный чит</div>
+                                <div class="detail-value">Unicore</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <a href="game/honkai.html" class="view-button">
+                            <i class="fas fa-folder-open"></i>
+                            Просмотреть файлы
+                        </a>
+                    </div>
                 </div>
-                <div class="game-footer">
-                    <a href="game/honkai.html" class="view-button">
-                        <i class="fas fa-folder-open"></i>
-                        Просмотреть файлы
-                    </a>
-                </div>
-            </div>
 
-            <div class="game-card">
-                <div class="game-header">
-                    <h3 class="game-title">Counter-Strike 2</h3>
-                    <div class="game-meta">
-                        <span><i class="fas fa-tag"></i> Шутеры</span>
-                        <span><i class="fas fa-file-alt"></i> 1 файлов</span>
-                    </div>
-                </div>
-                <div class="game-body">
-                    <p class="game-description">Культовый шутер от первого лица с тактическим геймплеем</p>
-                    <div class="game-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Последнее обновление</div>
-                            <div class="detail-value">2025-07-29</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Самый популярный чит</div>
-                            <div class="detail-value">Nixware Crack</div>
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3 class="game-title">Counter-Strike 2</h3>
+                        <div class="game-meta">
+                            <span><i class="fas fa-tag"></i> Шутеры</span>
+                            <span><i class="fas fa-file-alt"></i> 1 файлов</span>
                         </div>
                     </div>
+                    <div class="game-body">
+                        <p class="game-description">Культовый шутер от первого лица с тактическим геймплеем</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Последнее обновление</div>
+                                <div class="detail-value">2025-07-29</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Самый популярный чит</div>
+                                <div class="detail-value">Nixware Crack</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <a href="game/cs2.html" class="view-button">
+                            <i class="fas fa-folder-open"></i>
+                            Просмотреть файлы
+                        </a>
+                    </div>
                 </div>
-                <div class="game-footer">
-                    <a href="game/cs2.html" class="view-button">
-                        <i class="fas fa-folder-open"></i>
-                        Просмотреть файлы
-                    </a>
-                </div>
-            </div>
 
-            <div class="game-card">
-                <div class="game-header">
-                    <h3 class="game-title">Standoff 2</h3>
-                    <div class="game-meta">
-                        <span><i class="fas fa-tag"></i> Шутеры</span>
-                        <span><i class="fas fa-file-alt"></i> 1 файлов</span>
-                    </div>
-                </div>
-                <div class="game-body">
-                    <p class="game-description">Мобильный шутер от первого лица</p>
-                    <div class="game-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Последнее обновление</div>
-                            <div class="detail-value">2025-08-11</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Самый популярный чит</div>
-                            <div class="detail-value">NerestPC</div>
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3 class="game-title">Standoff 2</h3>
+                        <div class="game-meta">
+                            <span><i class="fas fa-tag"></i> Шутеры</span>
+                            <span><i class="fas fa-file-alt"></i> 1 файлов</span>
                         </div>
                     </div>
+                    <div class="game-body">
+                        <p class="game-description">Мобильный шутер от первого лица</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Последнее обновление</div>
+                                <div class="detail-value">2025-08-11</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Самый популярный чит</div>
+                                <div class="detail-value">NerestPC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <a href="game/standoff2.html" class="view-button">
+                            <i class="fas fa-folder-open"></i>
+                            Просмотреть файлы
+                        </a>
+                    </div>
                 </div>
-                <div class="game-footer">
-                    <a href="game/standoff2.html" class="view-button">
-                        <i class="fas fa-folder-open"></i>
-                        Просмотреть файлы
-                    </a>
-                </div>
-            </div>
 
-            <div class="game-card">
-                <div class="game-header">
-                    <h3 class="game-title">Roblox</h3>
-                    <div class="game-meta">
-                        <span><i class="fas fa-tag"></i> Песочницы</span>
-                        <span><i class="fas fa-file-alt"></i> 1 файлов</span>
-                    </div>
-                </div>
-                <div class="game-body">
-                    <p class="game-description">Культовая песочница с бесконечными возможностями</p>
-                    <div class="game-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Последнее обновление</div>
-                            <div class="detail-value">2025-08-06</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Самый популярный чит</div>
-                            <div class="detail-value">Xeno Executor</div>
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3 class="game-title">Roblox</h3>
+                        <div class="game-meta">
+                            <span><i class="fas fa-tag"></i> Песочницы</span>
+                            <span><i class="fas fa-file-alt"></i> 1 файлов</span>
                         </div>
                     </div>
-                </div>
-                <div class="game-footer">
-                    <a href="game/roblox.html" class="view-button">
-                        <i class="fas fa-folder-open"></i>
-                        Просмотреть файлы
-                    </a>
+                    <div class="game-body">
+                        <p class="game-description">Культовая песочница с бесконечными возможностями</p>
+                        <div class="game-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Последнее обновление</div>
+                                <div class="detail-value">2025-08-06</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Самый популярный чит</div>
+                                <div class="detail-value">Xeno Executor</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <a href="game/roblox.html" class="view-button">
+                            <i class="fas fa-folder-open"></i>
+                            Просмотреть файлы
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h5><i class="fas fa-info-circle"></i> О проекте</h5>
-                    <p>WINTRADE PROJECT - платформа для безопасного скачивания игровых файлов, модов и инструментов.</p>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h5><i class="fas fa-info-circle"></i> О проекте</h5>
+                        <p>WINTRADE PROJECT - платформа для безопасного скачивания игровых файлов, модов и инструментов.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Предупреждение</h5>
+                        <p>Используйте файлы на свой страх и риск. Мы не несем ответственности за возможные блокировки аккаунтов.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h5><i class="fas fa-link"></i> Контакты</h5>
+                        <ul class="footer-links">
+                            <li><a href="https://t.me/wintrade_project_bot" target="_blank">Telegram</a></li>
+                            <li><a href="#" class="text-white">Поддержка</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h5><i class="fas fa-exclamation-triangle"></i> Предупреждение</h5>
-                    <p>Используйте файлы на свой страх и риск. Мы не несем ответственности за возможные блокировки аккаунтов.</p>
-                </div>
-                <div class="footer-section">
-                    <h5><i class="fas fa-link"></i> Контакты</h5>
-                    <ul class="footer-links">
-                        <li><a href="https://t.me/wintrade_project_bot" target="_blank">Telegram</a></li>
-                        <li><a href="#" class="text-white">Поддержка</a></li>
-                    </ul>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 WINTRADE PROJECT. Все права защищены.</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 WINTRADE PROJECT. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
+    <script>
+    // Анимация логотипа
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoAnimation = document.getElementById('logoAnimation');
+        const animatedLogo = document.getElementById('animatedLogo');
+        const logoText = document.getElementById('logoText');
+        const mainContent = document.getElementById('mainContent');
+        const mainHeader = document.getElementById('mainHeader');
+
+        // Последовательность анимации
+        setTimeout(() => {
+            // 1. Показываем полный текст
+            logoText.classList.add('show');
+            
+            setTimeout(() => {
+                // 2. Перемещаем логотип в финальную позицию
+                animatedLogo.classList.add('final-position');
+                
+                setTimeout(() => {
+                    // 3. Показываем основной контент и header
+                    mainContent.classList.add('show');
+                    mainHeader.classList.add('show');
+                    
+                    setTimeout(() => {
+                        // 4. Плавно скрываем анимированный логотип
+                        logoAnimation.classList.add('fade-out');
+                    }, 300);
+                }, 800);
+            }, 1000);
+        }, 800);
+    });
+
+    // Только для GitHub Pages - обработка 404 ошибок
+    document.addEventListener('DOMContentLoaded', function() {
+        // Проверяем, находимся ли мы на GitHub Pages
+        if (window.location.hostname.includes('github.io')) {
+            // Проверяем, является ли текущая страница 404 ошибкой (только если URL содержит несуществующий путь)
+            const validPaths = [
+                '/',
+                '/index.html',
+                '/404.html',
+                '/game/genshin.html',
+                '/game/honkai.html', 
+                '/game/cs2.html',
+                '/game/standoff2.html',
+                '/game/roblox.html'
+            ];
+            
+            const currentPath = window.location.pathname;
+            
+            // Если текущий путь не в списке допустимых и мы не на 404 странице
+            if (!validPaths.includes(currentPath) && 
+                !validPaths.includes(currentPath + '.html') &&
+                !currentPath.includes('404.html')) {
+                
+                // Перенаправляем на 404 страницу
+                window.location.href = '404.html';
+            }
+        }
+    });
+    </script>
 </body>
 </html>
