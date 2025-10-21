@@ -35,19 +35,6 @@
             transition: opacity 0.5s ease;
         }
 
-        /* Скрыть анимацию на мобильных устройствах */
-        @media (max-width: 768px) {
-            .logo-animation {
-                display: none !important;
-            }
-            .main-content {
-                opacity: 1 !important;
-            }
-            .header {
-                opacity: 1 !important;
-            }
-        }
-
         .logo-animation.fade-out {
             opacity: 0;
             pointer-events: none;
@@ -60,19 +47,17 @@
             display: flex;
             align-items: center;
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
         }
 
         .logo-w {
             color: #4a6cfa;
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .logo-text {
             opacity: 0;
             transform: translateX(-20px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-left: 10px;
+            margin-left: 0;
             white-space: nowrap;
         }
 
@@ -81,18 +66,12 @@
             transform: translateX(0);
         }
 
-        .logo-text.hide {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-
-        .logo-w.move-center {
-            transform: translateX(0);
-        }
-
-        .logo-w.fade-out {
-            opacity: 0;
-            transform: scale(1.2);
+        .animated-logo.final-position {
+            font-size: 24px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            transform: none;
         }
 
         /* Скрываем основной контент во время анимации */
@@ -120,7 +99,7 @@
     <!-- Анимированный логотип -->
     <div class="logo-animation" id="logoAnimation">
         <div class="animated-logo" id="animatedLogo">
-            <span class="logo-w" id="logoW">W</span>
+            <span class="logo-w">W</span>
             <span class="logo-text" id="logoText">INTRADE PROJECT</span>
         </div>
     </div>
@@ -324,48 +303,30 @@
     document.addEventListener('DOMContentLoaded', function() {
         const logoAnimation = document.getElementById('logoAnimation');
         const animatedLogo = document.getElementById('animatedLogo');
-        const logoW = document.getElementById('logoW');
         const logoText = document.getElementById('logoText');
         const mainContent = document.getElementById('mainContent');
         const mainHeader = document.getElementById('mainHeader');
-        
-        // Проверка на мобильные устройства
-        const isMobile = window.innerWidth <= 768;
-        
-        if (isMobile) {
-            // На мобильных устройствах сразу показываем контент
-            mainContent.classList.add('show');
-            mainHeader.classList.add('show');
-            logoAnimation.style.display = 'none';
-            return;
-        }
 
-        // Последовательность анимации для десктопов
+        // Последовательность анимации
         setTimeout(() => {
             // 1. Показываем полный текст
             logoText.classList.add('show');
             
             setTimeout(() => {
-                // 2. Убираем текст и возвращаем W в центр
-                logoText.classList.remove('show');
-                logoText.classList.add('hide');
+                // 2. Перемещаем логотип в финальную позицию
+                animatedLogo.classList.add('final-position');
                 
                 setTimeout(() => {
-                    // 3. Исчезаем W
-                    logoW.classList.add('fade-out');
+                    // 3. Показываем основной контент и header
+                    mainContent.classList.add('show');
+                    mainHeader.classList.add('show');
                     
                     setTimeout(() => {
-                        // 4. Показываем основной контент и header
-                        mainContent.classList.add('show');
-                        mainHeader.classList.add('show');
-                        
-                        setTimeout(() => {
-                            // 5. Плавно скрываем анимированный логотип
-                            logoAnimation.classList.add('fade-out');
-                        }, 300);
-                    }, 500);
+                        // 4. Плавно скрываем анимированный логотип
+                        logoAnimation.classList.add('fade-out');
+                    }, 300);
                 }, 800);
-            }, 1200);
+            }, 1000);
         }, 800);
     });
 
