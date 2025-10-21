@@ -35,6 +35,19 @@
             transition: opacity 0.5s ease;
         }
 
+        /* Скрыть анимацию на мобильных устройствах */
+        @media (max-width: 768px) {
+            .logo-animation {
+                display: none !important;
+            }
+            .main-content {
+                opacity: 1 !important;
+            }
+            .header {
+                opacity: 1 !important;
+            }
+        }
+
         .logo-animation.fade-out {
             opacity: 0;
             pointer-events: none;
@@ -47,17 +60,19 @@
             display: flex;
             align-items: center;
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
         .logo-w {
             color: #4a6cfa;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .logo-text {
             opacity: 0;
             transform: translateX(-20px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-left: 0;
+            margin-left: 10px;
             white-space: nowrap;
         }
 
@@ -66,12 +81,18 @@
             transform: translateX(0);
         }
 
-        .animated-logo.final-position {
-            font-size: 24px;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            transform: none;
+        .logo-text.hide {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .logo-w.move-center {
+            transform: translateX(0);
+        }
+
+        .logo-w.fade-out {
+            opacity: 0;
+            transform: scale(1.2);
         }
 
         /* Скрываем основной контент во время анимации */
@@ -99,7 +120,7 @@
     <!-- Анимированный логотип -->
     <div class="logo-animation" id="logoAnimation">
         <div class="animated-logo" id="animatedLogo">
-            <span class="logo-w">W</span>
+            <span class="logo-w" id="logoW">W</span>
             <span class="logo-text" id="logoText">INTRADE PROJECT</span>
         </div>
     </div>
@@ -303,31 +324,78 @@
     document.addEventListener('DOMContentLoaded', function() {
         const logoAnimation = document.getElementById('logoAnimation');
         const animatedLogo = document.getElementById('animatedLogo');
+        const logoW = document.getElementById('logoW');
         const logoText = document.getElementById('logoText');
         const mainContent = document.getElementById('mainContent');
         const mainHeader = document.getElementById('mainHeader');
+        
+        // Проверка на мобильные устройства
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            // На мобильных устройствах сразу показываем контент
+            mainContent.classList.add('show');
+            mainHeader.classList.add('show');
+            logoAnimation.style.display = 'none';
+            return;
+        }
 
-        // Последовательность анимации
+        // Последовательность анимации для десктопов
         setTimeout(() => {
             // 1. Показываем полный текст
             logoText.classList.add('show');
             
             setTimeout(() => {
-                // 2. Перемещаем логотип в финальную позицию
-                animatedLogo.classList.add('final-position');
+                // 2. Убираем текст и возвращаем W в центр
+                logoText.classList.remove('show');
+                logoText.classList.add('hide');
                 
                 setTimeout(() => {
-                    // 3. Показываем основной контент и header
-                    mainContent.classList.add('show');
-                    mainHeader.classList.add('show');
+                    // 3. Исчезаем W
+                    logoW.classList.add('fade-out');
                     
                     setTimeout(() => {
-                        // 4. Плавно скрываем анимированный логотип
-                        logoAnimation.classList.add('fade-out');
-                    }, 300);
-                }, 500);
-            }, 700);
+                        // 4. Показываем основной контент и header
+                        mainContent.classList.add('show');
+                        mainHeader.classList.add('show');
+                        
+                        setTimeout(() => {
+                            // 5. Плавно скрываем анимированный логотип
+                            logoAnimation.classList.add('fade-out');
+                        }, 300);
+                    }, 500);
+                }, 800);
+            }, 1200);
         }, 800);
+    });
+
+    // Только для GitHub Pages - обработка 404 ошибок
+    document.addEventListener('DOMContentLoaded', function() {
+        // Проверяем, находимся ли мы на GitHub Pages
+        if (window.location.hostname.includes('github.io')) {
+            // Проверяем, является ли текущая страница 404 ошибкой (только если URL содержит несуществующий путь)
+            const validPaths = [
+                '/',
+                '/index.html',
+                '/404.html',
+                '/game/genshin.html',
+                '/game/honkai.html', 
+                '/game/cs2.html',
+                '/game/standoff2.html',
+                '/game/roblox.html'
+            ];
+            
+            const currentPath = window.location.pathname;
+            
+            // Если текущий путь не в списке допустимых и мы не на 404 странице
+            if (!validPaths.includes(currentPath) && 
+                !validPaths.includes(currentPath + '.html') &&
+                !currentPath.includes('404.html')) {
+                
+                // Перенаправляем на 404 страницу
+                window.location.href = '404.html';
+            }
+        }
     });
     </script>
 </body>
