@@ -325,38 +325,9 @@
                         // 4. Плавно скрываем анимированный логотип
                         logoAnimation.classList.add('fade-out');
                     }, 300);
-                }, 800);
-            }, 1000);
+                }, 500);
+            }, 700);
         }, 800);
-    });
-
-    // Только для GitHub Pages - обработка 404 ошибок
-    document.addEventListener('DOMContentLoaded', function() {
-        // Проверяем, находимся ли мы на GitHub Pages
-        if (window.location.hostname.includes('github.io')) {
-            // Проверяем, является ли текущая страница 404 ошибкой (только если URL содержит несуществующий путь)
-            const validPaths = [
-                '/',
-                '/index.html',
-                '/404.html',
-                '/game/genshin.html',
-                '/game/honkai.html', 
-                '/game/cs2.html',
-                '/game/standoff2.html',
-                '/game/roblox.html'
-            ];
-            
-            const currentPath = window.location.pathname;
-            
-            // Если текущий путь не в списке допустимых и мы не на 404 странице
-            if (!validPaths.includes(currentPath) && 
-                !validPaths.includes(currentPath + '.html') &&
-                !currentPath.includes('404.html')) {
-                
-                // Перенаправляем на 404 страницу
-                window.location.href = '404.html';
-            }
-        }
     });
     </script>
 </body>
